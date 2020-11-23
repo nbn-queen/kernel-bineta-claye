@@ -22,8 +22,8 @@ void init_pic(void)
 	outb(0xA1 , 0x28);
 
     /* ICW3 */
-	outb(0x21 , 4); //  decimal value 
-	outb(0xA1 , 2); //  bit number
+	outb(0x21 ,0x04); //  decimal value 
+	outb(0xA1 ,0x02); //  bit number
 
     /* ICW4 */
 	outb(0x21 , 0x01);
