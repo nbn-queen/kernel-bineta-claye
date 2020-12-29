@@ -96,20 +96,17 @@ void generic_c_handler(registers_t regs)
     {
         printf ("recieved isr: ");
         printf(" Handler exception. Code: %d", regs.nb);
-    }
+
        
-    if(regs.nb > 48)
+    else
     {
-         printf("recieved a syscall");
-         printf(" Handler exception. Code: %d", regs.nb);
-    }
-    else {
-         printf("recieved irq ");
-         printf ("Unhandler exception. Code: %d", regs.nb);
-         if (regs.nb >= 40) // if interrupt come from a the slave 
-         {
-             
-         }
-         
+        
+        if (regs.nb - 32 == 0)
+             printf("recieved a irq0");
+        else if(regs.nb - 32 == 1)
+             printf("recieved irq1 ");
+        else
+             printf("interrupt no handler for the moment")
+
     }
 }
