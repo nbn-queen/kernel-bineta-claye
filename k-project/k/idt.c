@@ -93,8 +93,23 @@ void init_idt()
 void generic_c_handler(registers_t regs)
 {
     if(regs.nb < 32)
+    {
+        printf ("recieved isr: ");
         printf(" Handler exception. Code: %d", regs.nb);
+    }
+       
+    if(regs.nb > 48)
+    {
+         printf("recieved a syscall");
+         printf(" Handler exception. Code: %d", regs.nb);
+    }
     else {
-        printf ("Unhandler exception. Code: %d", regs.nb);
+         printf("recieved irq ");
+         printf ("Unhandler exception. Code: %d", regs.nb);
+         if (regs.nb >= 40) // if interrupt come from a the slave 
+         {
+             
+         }
+         
     }
 }
