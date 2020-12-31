@@ -89,22 +89,42 @@ void init_idt()
       : "memory");
 }
 
+unsigned long gettick(void)
+{
+
+}
+
+int getkey(void) 
+{
+
+    if ()
+    {
+        return k;
+    }
+    return -1;
+}
 
 void generic_c_handler(registers_t regs)
 {
     if(regs.nb < 32)
     {
         printf ("recieved isr: ");
-        printf(" Handler exception. Code: %d", regs.nb);
-
-       
+        printf(" Handler exception. Code: %d", regs.nb);   
     else
-    {
-        
+    {    
         if (regs.nb - 32 == 0)
-             printf("recieved a irq0");
+        {
+            printf("recieved a irq0");
+            gettick();
+        }
+             
         else if(regs.nb - 32 == 1)
-             printf("recieved irq1 ");
+        {
+            printf("recieved irq1");
+            getkey();
+            outb(0x20,0x20);
+        }
+             
         else
              printf("interrupt no handler for the moment")
 
