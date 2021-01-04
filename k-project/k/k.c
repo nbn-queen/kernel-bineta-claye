@@ -37,8 +37,7 @@ void k_main(unsigned long magic, multiboot_info_t *info)
 	init_idt();
     printf("toto IS cute\n");
 
-    
-    printf ("%d", 5 / 2);
+    asm volatile("int $0x3");
     (void)magic;
     (void)info;
 
