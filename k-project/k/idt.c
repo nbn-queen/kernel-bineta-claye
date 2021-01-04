@@ -96,6 +96,22 @@ unsigned long gettick(void)
 
 int getkey(void) 
 {
+    char status;
+    int scancode;
+    outb(0x20, 0x20);
+    status = int (KEYBOARD_STATUS_PORT);
+    if (status) // check if a the key is pressed
+    {
+        scancode = inb(KEYBOARD_DATA_PORT);
+        if (scancode < 0)
+            return -1;
+        char k = key_map[scancode];
+      printf("%k", k);
+    return k;  
+    }
+    return -1;
+}
+    
 
     if ()
     {
