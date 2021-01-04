@@ -31,10 +31,11 @@
 
 void k_main(unsigned long magic, multiboot_info_t *info)
 {
-    init_serial();
-    load();
-    load_cr0_seg_and_cs();
-	init_idt();
+    init_serial();  
+    load();   			// INIT GDT
+    load_cr0_seg_and_cs();  // switch to protected mode
+	init_idt();				// init IDT
+	init_pic();				// init PIC
     printf("toto IS cute\n");
 
     asm volatile("int $0x3");
