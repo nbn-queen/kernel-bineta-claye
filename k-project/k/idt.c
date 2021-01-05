@@ -106,19 +106,13 @@ int getkey(void)
         if (scancode < 0)
             return -1;
         char k = key_map[scancode];
-      printf("%k", k);
-    return k;  
+      printf("%c", k);
+    return scancode;  
     }
     return -1;
 }
     
 
-    if ()
-    {
-        return k;
-    }
-    return -1;
-}
 
 void generic_c_handler(registers_t regs)
 {
