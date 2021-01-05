@@ -4,6 +4,7 @@
 #include "multiboot.h"
 #include "io.h"
 #include "idt.h"
+#include "keyboard.h"
 
 struct idt_entry idt[256];
 struct idt_ptr   idtr;
