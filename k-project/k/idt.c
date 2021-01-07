@@ -110,7 +110,6 @@ int getkey(void)
     int scancode;
   
     status = inb (KEYBOARD_STATUS_PORT);
-   // printf ("%x\n",status);
     if (status & 0x01) // check if a the key is pressed
     {
         scancode = inb(KEYBOARD_DATA_PORT);
