@@ -34,6 +34,8 @@ OBJS	= \
 	  gdt.o \
 	  isr.o \
 	  idt.o \
+	  pic.o \
+	  timer.o \
 
 
 DEPS = $(OBJS:.o=.d)

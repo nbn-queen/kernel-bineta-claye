@@ -6,8 +6,14 @@
 #include "idt.h"
 #include "keyboard.h"
 
-struct idt_entry idt[256];
+
+
+
+
 struct idt_ptr   idtr;
+struct idt_entry idt[256];
+
+u32 tick = 0;
 
 
 void idt_set (u32 base, u16 sel, u8 flags , u8 num)
@@ -92,6 +98,9 @@ void init_idt()
 
 unsigned long gettick(void)
 {
+        init_timer();
+        printf("Tick: %d\n",tick);
+        return tick;
 
 }
 
@@ -99,15 +108,16 @@ int getkey(void)
 {
     char status;
     int scancode;
-    outb(0x20, 0x20);
-    status = int (KEYBOARD_STATUS_PORT);
-    if (status) // check if a the key is pressed
+  
+    status = inb (KEYBOARD_STATUS_PORT);
+   // printf ("%x\n",status);
+    if (status & 0x01) // check if a the key is pressed
     {
         scancode = inb(KEYBOARD_DATA_PORT);
         if (scancode < 0)
             return -1;
-        char k = key_map[scancode];
-      printf("%c", k);
+        char k = keys_map[scancode];
+      printf("%c\n", k);
     return scancode;  
     }
     return -1;
@@ -121,8 +131,10 @@ void generic_c_handler(registers_t regs)
     {
         printf ("recieved isr: ");
         printf(" Handler exception. Code: %d", regs.nb);   
+    }
     else
-    {    
+    {   
+        tick ++; 
         if (regs.nb - 32 == 0)
         {
             printf("recieved a irq0");
@@ -137,7 +149,7 @@ void generic_c_handler(registers_t regs)
         }
              
         else
-             printf("interrupt no handler for the moment")
+             printf("interrupt no handler for the moment");
 
     }
 }

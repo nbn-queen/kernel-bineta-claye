@@ -10,7 +10,10 @@ void init_timer()
     u8 low = (u8)(divisor & 0xFF);
     u8 high = (u8)((divisor >> 8) & 0xFF);
 
+
     outb(COUNTER0, low);
     outb(COUNTER0, high);
+
+     // Send the frequency divisor.
     outb(0x20, 0x20);
 }

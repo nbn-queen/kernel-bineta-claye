@@ -20,7 +20,9 @@ isr\nb:
 
 # Exception 
 
-.extern isr_hhttps://www.streamserie.co/
+.extern isr_handler
+
+isr_stub:
     pusha
     pushl %esp
     call	generic_c_handler

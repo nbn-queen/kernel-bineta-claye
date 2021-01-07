@@ -36,9 +36,16 @@ void k_main(unsigned long magic, multiboot_info_t *info)
     load_cr0_seg_and_cs();  // switch to protected mode
 	init_idt();				// init IDT
 	init_pic();				// init PIC
+	init_timer();			// init timer
     printf("toto IS cute\n");
 
-    asm volatile("int $0x3");
+
+
+
+	getkey();
+
+
+   // asm volatile("int $0x3");
     (void)magic;
     (void)info;
 

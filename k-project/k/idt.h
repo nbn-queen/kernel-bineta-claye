@@ -29,6 +29,9 @@ struct idt_ptr
 
 void init_idt();
 void generic_c_handler(registers_t regs);
+void init_pic(void);
+int getkey(void);
+void init_timer();
 
 // ISR Handler
 extern void isr0 ();
