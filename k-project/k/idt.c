@@ -153,7 +153,7 @@ int getkey(void)
     int scancode;
   
     status = inb (KEYBOARD_STATUS_PORT);
-    while (!(status & 0x01)) // check if a the key is pressed
+    if (status & 0x01) // check if a the key is pressed
     {
         scancode = inb(KEYBOARD_DATA_PORT);
         if (scancode < 0)

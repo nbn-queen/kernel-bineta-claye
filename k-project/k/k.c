@@ -47,16 +47,16 @@ void k_main(unsigned long magic, multiboot_info_t *info)
 // test IRQ
 	
 	//asm volatile("int $0x20"); // 0
-	asm volatile("int $0x21"); // 1
+	//asm volatile("int $0x21"); // 1
 
 
 
 
 
-  //while (1)
- // {
-	//  getkey();  // Test Keyboard
- // }
+  while (1)
+  {
+  getkey();  // Test Keyboard
+ }
  
 	
 
