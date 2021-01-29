@@ -53,12 +53,10 @@ void k_main(unsigned long magic, multiboot_info_t *info)
 
 
 
-  while (1)
-  {
-  getkey();  // Test Keyboard
- }
- 
-	
+ // while (1)
+  //{
+  //getkey();  // Test Keyboard
+ //}
 
 
    // asm volatile("int $0x3");

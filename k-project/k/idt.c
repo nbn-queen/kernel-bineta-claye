@@ -158,7 +158,7 @@ int getkey(void)
         scancode = inb(KEYBOARD_DATA_PORT);
         if (scancode < 0)
             return -1;
-        char k = keys_map[scancode];
+    //   char k = keys_map[scancode]; Our map
       printf("%x\n", scancode);
     return scancode;  
     }
