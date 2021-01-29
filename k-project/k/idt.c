@@ -159,7 +159,7 @@ int getkey(void)
         if (scancode < 0)
             return -1;
     //   char k = keys_map[scancode]; Our map
-      printf("%x\n", scancode);
+      printf("%x \n", scancode);
     return scancode;  
     }
     return -1;
