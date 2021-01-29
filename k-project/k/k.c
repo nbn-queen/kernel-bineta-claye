@@ -39,10 +39,26 @@ void k_main(unsigned long magic, multiboot_info_t *info)
 	init_timer();			// init timer
     printf("toto IS cute\n");
 
+// test exception
+	//asm volatile("int $0x0"); 
+	//asm volatile("int $0x3");  
+	//asm volatile("int $0x4");  
+
+// test IRQ
+	
+	//asm volatile("int $0x20"); // 0
+	asm volatile("int $0x21"); // 1
 
 
 
-	getkey();
+
+
+  //while (1)
+ // {
+	//  getkey();  // Test Keyboard
+ // }
+ 
+	
 
 
    // asm volatile("int $0x3");

@@ -7,7 +7,50 @@
 #include "keyboard.h"
 
 
+func interrupt_handlers[256] = {0};
 
+
+void set_interrupt_tab (u8 n, func f)
+{
+    interrupt_handlers[n] = f;
+}
+
+
+
+static char* exceptions[32] = {
+   "Division by Zero",
+   "Debug exception",
+   "Non Maskable Interrupt",
+   "Breakpoint",
+   "Overflow",
+   "Bound Range Exceeded",
+   "Invalid Opcode",
+   "Device Not Available",
+   "Double fault",
+   "Coprocessor",
+   "Invalid TSS",
+   "Segment not present",
+   "Stack Segment Fault",
+   "General Protection Fault",
+   "Page Fault",
+   "(Intel Reserved)",
+   "x87 FPU (Math Fault)",
+   "Alignment Check",
+   "Machine Check",
+   "SMD Floating Point Ex.",
+   "Virtualization Ex.",
+   "(Intel Reserved)",
+   "(Intel Reserved)",
+   "(Intel Reserved)",
+   "(Intel Reserved)",
+   "(Intel Reserved)",
+   "(Intel Reserved)",
+   "(Intel Reserved)",
+   "(Intel Reserved)",
+   "(Intel Reserved)",
+   "(Intel Reserved)",
+   "(Intel Reserved)"
+};
 
 
 struct idt_ptr   idtr;
@@ -98,7 +141,7 @@ void init_idt()
 
 unsigned long gettick(void)
 {
-        init_timer();
+        gettick ();
         printf("Tick: %d\n",tick);
         return tick;
 
@@ -110,13 +153,13 @@ int getkey(void)
     int scancode;
   
     status = inb (KEYBOARD_STATUS_PORT);
-    if (status & 0x01) // check if a the key is pressed
+    while (!(status & 0x01)) // check if a the key is pressed
     {
         scancode = inb(KEYBOARD_DATA_PORT);
         if (scancode < 0)
             return -1;
         char k = keys_map[scancode];
-      printf("%c\n", k);
+      printf("%x\n", scancode);
     return scancode;  
     }
     return -1;
@@ -128,27 +171,27 @@ void generic_c_handler(registers_t regs)
 {
     if(regs.nb < 32)
     {
-        printf ("recieved isr: ");
-        printf(" Handler exception. Code: %d", regs.nb);   
+        
+        printf("[!] Exception: %s (%u)\n", exceptions[regs.nb], regs.nb);   
     }
     else
     {   
         tick ++; 
         if (regs.nb - 32 == 0)
         {
-            printf("recieved a irq0");
+            printf("recieved a irq0 \n");
             gettick();
         }
              
         else if(regs.nb - 32 == 1)
         {
-            printf("recieved irq1");
+            printf("recieved irq1\n");
             getkey();
             outb(0x20,0x20);
         }
              
         else
-             printf("interrupt no handler for the moment");
+             printf("[!] Interrupt no handler for the moment \n");
 
     }
 }

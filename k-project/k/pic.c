@@ -31,8 +31,8 @@ void init_pic(void)
 	
 
   /*OCW1*/
-  outb(0x21 , 0xfc);
-  outb(0xA1 , 0xff);
+  outb(0x21 , 0xfc); // IRQ0 et IRQ1 master sont gerer 
+  outb(0xA1 , 0xff); // Ne gere pas les irq0 
 
   /*OCW2*/
 

@@ -5,6 +5,9 @@
 #define FLAGS 0x8E
 
 
+typedef void (*func)(struct interupt_context c); 
+
+
 typedef struct registers
 {
    u32 ds;                  // Data segment selector
@@ -26,6 +29,12 @@ struct idt_ptr
    u16 limit;
    u32 base;               
 } __attribute__((packed));
+
+
+
+
+
+
 
 void init_idt();
 void generic_c_handler(registers_t regs);
